@@ -78,5 +78,3 @@ ENV PATH $HIVE_HOME/bin:$PATH
 
 # Derby for Hive metastore backend
 RUN cd $HIVE_HOME && $HIVE_HOME/bin/schematool -initSchema -dbType derby
-
-EXPOSE 80 443
