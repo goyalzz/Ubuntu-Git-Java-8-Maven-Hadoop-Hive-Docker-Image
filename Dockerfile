@@ -56,6 +56,9 @@ RUN ln -s /opt/maven/bin/mvn /usr/local/bin
 RUN rm -f /tmp/apache-maven-3.3.9-bin.tar.gz
 ENV MAVEN_HOME /opt/maven
 
+# Update Software repository
+RUN apt-get update
+
 # Install Hadoop
 RUN mkdir /usr/local/hadoop
 RUN wget --no-verbose -O /usr/local/hadoop/hadoop-2.7.2.tar.gz http://apache.claz.org/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz | tar -xz -C /usr/local/hadoop --strip-components 1
@@ -68,6 +71,8 @@ ENV HADOOP_HDFS_HOME $HADOOP_INSTALL
 ENV YARN_HOME $HADOOP_INSTALL
 ENV PATH $HADOOP_HOME/bin:$PATH
 
+# Update Software repository
+RUN apt-get update
 
 # Install Hive
 RUN mkdir /usr/local/hive

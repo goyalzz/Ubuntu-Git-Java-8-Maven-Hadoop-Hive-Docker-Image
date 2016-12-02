@@ -19,3 +19,16 @@
 - create table product(product int, productname string, price float);
 - describe product;
 - select * from product;
+
+# Some useful docker comands #
+1.  `docker search ubuntu/java`
+2.  `docker images -a`
+3.  `docker ps -a`
+4.  `exit`
+5.  `docker run -it <Image>`
+6.  `docker rm -f $(docker ps -a -q)`
+7.  `docker rmi -f $(docker images -a -q)`
+8.  `docker tag <image> <new name>`
+9.  `docker build -f Dockerfile -t <image name> .`
+10. `touch Dockerfile`
+11. `docker exec -it <CONTAINER_ID> /bin/bash`
