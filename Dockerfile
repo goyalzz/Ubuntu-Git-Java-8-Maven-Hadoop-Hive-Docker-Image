@@ -6,7 +6,7 @@
 # Reference Command: docker search ubuntu/java
 
 # Download base image ubuntu 16.04
-FROM ubuntu:latest
+FROM goyalzz/ubuntu:latest
 
 MAINTAINER  Ankush Goyal <ankush.goyal@prontoitlabs.com>
 
