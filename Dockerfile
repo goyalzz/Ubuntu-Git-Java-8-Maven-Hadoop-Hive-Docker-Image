@@ -2,12 +2,15 @@
 # Reference URL: https://www.howtoforge.com/tutorial/how-to-create-docker-images-with-dockerfile/
 # Reference URL: https://hub.docker.com/r/mcpayment/ubuntu1404-java8/~/dockerfile/
 # Reference URL: https://github.com/TexaiCognitiveArchitecture/docker-java8-jenkins-maven-git-nano
+# Reference URL: https://github.com/kurron/docker-sts/blob/master/Dockerfile
 # Reference Command: docker search ubuntu/java
 
 # Download base image ubuntu 16.04
-FROM ubuntu
+FROM ubuntu:latest
 
 MAINTAINER  Ankush Goyal <ankush.goyal@prontoitlabs.com>
+
+LABEL org.goyalzz.ide.name="Spring Tool Suite" org.goyalzz.ide.version=3.7.2
  
 # Update Software repository
 RUN apt-get update
@@ -59,27 +62,22 @@ ENV MAVEN_HOME /opt/maven
 # Update Software repository
 RUN apt-get update
 
-# Install Hadoop
-RUN mkdir /usr/local/hadoop
-RUN wget --no-verbose -O /usr/local/hadoop/hadoop-2.7.2.tar.gz http://apache.claz.org/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz | tar -xz -C /usr/local/hadoop --strip-components 1
-ENV HADOOP_HOME /usr/local/hadoop
-ENV HADOOP_INSTALL $HADOOP_HOME
-ENV PATH $PATH:$HADOOP_INSTALL/sbin
-ENV HADOOP_MAPRED_HOME $HADOOP_INSTALL
-ENV HADOOP_COMMON_HOME $HADOOP_INSTALL
-ENV HADOOP_HDFS_HOME $HADOOP_INSTALL
-ENV YARN_HOME $HADOOP_INSTALL
-ENV PATH $HADOOP_HOME/bin:$PATH
+# Download Spring-Tool-Suit (v3.8.4.RELEASE)
+ADD http://download.springsource.com/release/STS/3.8.4.RELEASE/dist/e4.6/spring-tool-suite-3.8.4.RELEASE-e4.6.3-linux-gtk-x86_64.tar.gz /tmp/ide.tar.gz
 
-# Update Software repository
-RUN apt-get update
+# Install STS
+RUN mkdir -p /opt/ide && \
+    tar zxvf /tmp/ide.tar.gz --strip-components=1 -C /opt/ide && \
+    ln -s /usr/lib/jvm/jdk1.8.0_65/jre /opt/ide/sts-3.7.2.RELEASE/jre && \
+    chown -R developer:developer /opt/ide && \
+    rm /tmp/ide.tar.gz && \
+    apt-get update && \
+    apt-get install -y libxslt1.1 && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/*
 
-# Install Hive
-RUN mkdir /usr/local/hive
-RUN wget --no-verbose -O /usr/local/hive/apache-hive-2.1.0-bin.tar.gz http://apache.mesi.com.ar/hive/hive-2.1.0/apache-hive-2.1.0-bin.tar.gz | tar -xz -C /usr/local/hive --strip-components 1
-ENV HIVE_HOME /usr/local/hive
-ENV PATH $HIVE_HOME/bin:$PATH
-
-
-# Derby for Hive metastore backend
-RUN cd $HIVE_HOME && $HIVE_HOME/bin/schematool -initSchema -dbType derby
+USER developer:developer
+WORKDIR /home/developer
+ENTRYPOINT ["/opt/ide/sts-3.7.2.RELEASE/STS"]
