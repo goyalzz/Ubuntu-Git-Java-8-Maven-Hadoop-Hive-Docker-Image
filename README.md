@@ -1,24 +1,41 @@
-### Ubuntu-Git-Java-8-Maven-Hadoop-Hive-Docker-Image ###
-> Docker image having Ubuntu Git Java-8 Maven hadoop Hive.
+### Ubuntu-Git-Java-8-Maven-Spring-Tool-Suit-Docker-Image ###
+> This project is a simple Docker image that runs the [Spring Tool Suite IDE]().
 
 ## Version ##
 * Ubuntu Latest
 * Git Latest
 * Oracle Java 8
 * Maven Latest
-* Apache Hadoop - 2.7.2
-* Apache Hive - 2.1.0
+* STS - 3.8.4.RELEASE
 
 ## Setup ##
 1. Install [docker](https://www.docker.com/products/overview "Install Docker")
-2. Execute to start Hive CLI `docker run -it goyalzz/ubuntu-git-java-8-maven-hadoop-hive-docker-image /bin/bash -c 'cd /usr/local/hive && ./bin/hive'`
+2. Execute to start Hive CLI `docker run -it goyalzz/Ubuntu-Git-Java-8-Maven-Spring-Tool-Suit-Docker-Image /bin/bash`
 
-## Test Hive ##
-- create database sample;
-- use sample;
-- create table product(product int, productname string, price float);
-- describe product;
-- select * from product;
+## Prerequisites ##
+* a working [Docker](http://docker.io) engine
+* a working [Docker Compose](http://docker.io) installation
+
+## Building ##
+Type `docker-compose build` to build the image.
+
+## Installation ##
+Docker will automatically install the newly built image into the cache.
+
+## Tips and Tricks ##
+
+## Launching The Image ##
+
+`docker-compose up` will launch the image allowing you to begin working on projects. The Docker Compose file is 
+configured to mount your home directory into the container.  
+
+## User Account ##
+The image assumes that the account running the continer will have a user and group id of 1000:1000.  This allows the container 
+to save files in your home directory and keep the proper permissions.
+
+## X-Windows ##
+If the image complains that it cannot connect to your X server, simply run `xhost +` to allow the container to connect 
+to your X server.
 
 # Some useful docker comands #
 1.  `docker search ubuntu/java`
