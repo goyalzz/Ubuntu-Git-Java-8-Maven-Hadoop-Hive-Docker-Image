@@ -51,4 +51,4 @@ to your X server.
 11. `docker exec -it <CONTAINER_ID> /bin/bash`
 
 ##### Java PDF Creation Tutorial #####
-[Java Pdf Tutorial](https://examples.javacodegeeks.com/core-java/itext-tutorial-beginners/ "Goto Tutorial Point")
+[Java Pdf Tutorial](http://www.vogella.com/tutorials/JavaPDF/article.html "Goto Tutorial Point")
