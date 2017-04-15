@@ -81,3 +81,4 @@ RUN mkdir -p /opt/ide && \
 USER developer:developer
 WORKDIR /home/developer
 ENTRYPOINT ["/opt/ide/sts-3.7.2.RELEASE/STS"]
+EXPOSE 8080
