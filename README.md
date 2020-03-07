@@ -49,6 +49,7 @@ to your X server.
 9.  `docker build -f Dockerfile -t <image name> .`
 10. `touch Dockerfile`
 11. `docker exec -it <CONTAINER_ID> /bin/bash`
+12. [Log Rotate](https://sandro-keil.de/blog/logrotate-for-docker-container "Log Rotate")
 
 ##### Java PDF Creation Tutorial #####
 [Java Pdf Tutorial](http://www.vogella.com/tutorials/JavaPDF/article.html "Goto Tutorial Point")
